@@ -9,7 +9,6 @@ spec:
   ports:
     - name: mongodb 
       port: 27017 
-      nodePort: 30332
   clusterIP: "None" # headless service is a service with clusterIP assigned to "None"
   selector:
     app: mongo-db
