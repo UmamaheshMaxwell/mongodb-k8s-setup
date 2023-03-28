@@ -9,4 +9,5 @@ spec:
     - ReadWriteOnce
   capacity:
     storage: 2Gi 
-    
+  hostPath:
+    path: "/mnt/data"
