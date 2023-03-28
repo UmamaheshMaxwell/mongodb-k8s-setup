@@ -1,7 +1,9 @@
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
-  name: mongo-storage
-provisioner: kubernetes.io/no-provisoner
-volumeBindingMode: WaitForFirstConsumer
-allowVolumeExpansion: true
+  name: gcp-storage
+provisioner: kubernetes.io/gce-pd
+parameters:
+  type: pd-standard
+  fstype: ext4
+  replication-type: none
