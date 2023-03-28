@@ -1,0 +1,15 @@
+# A headless sevice is a service with a serviceIP, but instead of load balancing
+# it will return the IPs of our asscosiate pods
+apiVersion: v1 
+kind: Service 
+metadata:
+  name: mongodb-svc
+  namespace: production
+spec:
+  ports:
+    - name: mongodb 
+      port: 27017 
+      nodePort: 30332
+  clusterIP: "None" # headless service is a service with clusterIP assigned to "None"
+  selector:
+    app: mongo-db

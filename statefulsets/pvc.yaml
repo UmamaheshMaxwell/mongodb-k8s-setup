@@ -2,11 +2,11 @@ apiVersion: v1
 kind: PersistentVolumeClaim 
 metadata:
   name: mongodb-pvc
+  namespace: production
 spec:
-  storageClassName: mongodb-storage-class
+  storageClassName: mongo-storage
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
       storage: 1Gi
-      
