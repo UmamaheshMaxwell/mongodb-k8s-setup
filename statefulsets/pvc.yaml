@@ -4,7 +4,7 @@ metadata:
   name: mongodb-pvc
   namespace: production
 spec:
-  storageClassName: mongo-storage
+  storageClassName: gcp-storage
   accessModes:
     - ReadWriteOnce
   resources:
