@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql
+spec:
+  selector:
+    matchLabels:
+      db: mysql 
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        db: mysql
+    spec:
+      containers:
+        - name: mysql
+          image: mysql
+          env:
+            - name: MYSQL_USER
+              value: admin
+            - name: MYSQL_PASSWORD
+              value: admin
+            - name: MYSQL_ROOT_PASSWORD
+              value: admin
+          ports:
+            - containerPort: 3306
+              name: mysql
+          
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql
+spec:
+  ports:
+   - port: 3306
+  selector:
+    db: mysql
+  clusterIP: None
+  
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: my-sql-dump
+spec:
+  template:
+    metadata:
+      name: my-sql-dump
+    spec:
+      containers:
+      - name: my-sql-seed
+        image: jlsrly/mysql-git
+        command:
+          - 'bash'
+          - '-c'
+          - |
+            git clone https://github.com/UmamaheshMaxwell/stateful-k8s-setup.git
+            mysql -h mysql -u root -padmin -e 'CREATE DATABASE IF NOT EXISTS test';
+            mysql -h mysql -u root -padmin test < /stateful-k8s-setup/statefulsets/mysql/mysql.sql
+            sleep 10
+      restartPolicy: OnFailure
