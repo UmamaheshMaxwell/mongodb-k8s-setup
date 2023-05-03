@@ -1,4 +1,4 @@
 USE test;
-CREATE TABLE messages (ID INT NOT NULL AUTO_INCREMENT, message VARCHAR(250))
-INSERT INTO messages VALUES ('Hello')
-INSERT INTO messages VALUES ('Hey')
+CREATE TABLE messages (ID INT NOT NULL AUTO_INCREMENT, message VARCHAR(250));
+INSERT INTO messages VALUES ('Hello');
+INSERT INTO messages VALUES ('Hey');
